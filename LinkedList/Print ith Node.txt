@@ -1,0 +1,20 @@
+public class Solution {
+
+	public static void printIthNode(LinkedListNode<Integer> head, int i){
+		
+         LinkedListNode<Integer> current = head;
+        int count = 0;
+        
+         while (current != null)
+        {
+            if (count == i){
+                System.out.print(current.data);
+                return ;
+         }
+                
+         
+            count++;
+            current = current.next;
+         }
+    }
+}

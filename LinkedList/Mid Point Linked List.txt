@@ -1,0 +1,47 @@
+/*
+
+    Following is the Node class already written for the Linked List
+
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+    
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+*/
+
+public class Solution {
+    
+    public static LinkedListNode<Integer> midPoint(LinkedListNode<Integer> head) {
+        //Your code goes here
+        
+        LinkedListNode<Integer> slow= head;
+        LinkedListNode<Integer> fast= head;
+        LinkedListNode<Integer> answer= head;
+        
+        if(head==null){
+            return head;
+        }
+        if(head.next==null){
+            return head;
+        }
+        
+        while(fast != null){
+            
+            if(fast.next==null){
+                 return slow;
+            }
+            answer=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return answer;
+        
+        
+        
+    }
+
+}

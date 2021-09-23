@@ -1,0 +1,106 @@
+/*
+
+    Following is the Node class already written for the Linked List
+
+    class LinkedListNode<T> {
+        T data;
+        LinkedListNode<T> next;
+    
+        public LinkedListNode(T data) {
+            this.data = data;
+        }
+    }
+
+*/
+
+public class Solution {
+
+	public static LinkedListNode<Integer> mergeSort(LinkedListNode<Integer> head) {
+		//Your code goes here
+        //base case
+        if(head==null||head.next==null)
+        {
+            return head;
+        }
+        LinkedListNode<Integer> middle=getmiddle(head);
+        LinkedListNode<Integer> nextmid=middle.next;
+        middle.next=null;//yaha tak meri dono list break ho gayi
+        LinkedListNode<Integer> firstpart=mergeSort(head);
+        LinkedListNode<Integer> secondpart=mergeSort(nextmid);//yaha se dono solve ho kar aa jaynge
+        return merge(firstpart,secondpart);
+        
+        
+	}
+    public static LinkedListNode<Integer> getmiddle(LinkedListNode<Integer> head)
+    {
+        if(head==null||head.next==null)
+        {
+            return head;
+        }
+        LinkedListNode<Integer> slow=head;
+        LinkedListNode<Integer> fast=head.next;
+        while(fast!=null&&fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public static LinkedListNode<Integer> merge(LinkedListNode<Integer>head1,LinkedListNode<Integer> head2)
+    {
+         if(head1==null)
+        {
+            return head2;
+        }
+        if(head2==null)
+        {
+            return head1;
+        }
+                          
+    LinkedListNode<Integer> t3=null,h3=null;
+	LinkedListNode<Integer>t1=head1 , t2=head2;
+	if(t1.data<=t2.data) {
+		h3=t1;
+		t3=t1;
+		t1=t1.next;
+		
+	}else {
+		h3=t2;
+		t3=t2;
+		t2=t2.next;
+		
+	}
+	
+	while(t1!=null && t2!=null) {
+		
+		if(t1.data<=t2.data) {
+		t3.next=t1;	
+		t3=t1;
+		t1=t1.next;
+	}
+		else {
+			t3.next=t2;	
+			t3=t2;
+			t2=t2.next;	
+	}
+	
+	}
+	   // may be possible one linked list is samler , other is greater 
+       // same as we do in merge two sorted array 
+	   // we need toi make checck here 
+        
+	if(t2!=null) {
+		t3.next=t2;
+		
+	}
+	if(t1!=null) {
+		
+		t3.next=t1;
+		
+	}
+	
+	
+	return h3;
+    }
+
+}

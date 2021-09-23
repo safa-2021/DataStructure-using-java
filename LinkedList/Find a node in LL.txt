@@ -1,0 +1,31 @@
+/****************************************************************
+
+	Following is the class structure of the Node class:
+
+	class LinkedListNode<T> {
+    	T data;
+    	LinkedListNode<T> next;
+    
+    	public LinkedListNode(T data) {
+        	this.data = data;
+    	}
+	}
+
+*****************************************************************/
+
+public class Solution {
+	public static int findNode(LinkedListNode<Integer> head, int n) {
+		// Write your code here.
+         int index=0;
+       LinkedListNode<Integer> temp = head;
+        while(temp != null){
+            if(temp.data==n){
+                return index;
+            }
+            temp=temp.next;
+            index++;
+        }
+        return -1;
+        
+	}
+}
