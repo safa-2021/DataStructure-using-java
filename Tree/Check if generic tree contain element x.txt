@@ -1,0 +1,16 @@
+public static boolean checkIfContainsX(TreeNode<Integer> root, int x){
+   if(x==root.data){
+       return true;
+        }
+        boolean answer = false;
+        for(int i=0;i<root.children.size();i++){
+            answer=checkIfContainsX(root.children.get(i),x);
+        
+        if(answer){
+   return answer;
+        }
+    }
+        return false;
+    }
+
+   }

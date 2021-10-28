@@ -1,0 +1,19 @@
+public class Solution {
+
+	public static void insertDuplicateNode(BinaryTreeNode<Integer> root) {
+		
+        BinaryTreeNode<Integer> oldone;
+  
+        if (root == null)
+            return;
+  
+/*subtrees */
+        insertDuplicateNode(root.left);
+        insertDuplicateNode(root.right);
+  
+        /* duplicate this node to its left */
+        oldone = root.left;
+        root.left = new BinaryTreeNode(root.data);
+        root.left.left = oldone;
+    }
+}

@@ -1,0 +1,73 @@
+import java.util.*;
+public class Solution {
+
+	public static void nodesAtDistanceK(BinaryTreeNode<Integer> root, int node, int k) {
+	    //Your code goes here
+        HashMap<BinaryTreeNode<Integer>,BinaryTreeNode<Integer>> map=new HashMap<>();
+        Queue<BinaryTreeNode<Integer>> queue = new LinkedList<>();
+        queue.add(root);
+        BinaryTreeNode<Integer> mynode=null;
+        while(queue.size()>0){
+            int n=queue.size();
+            for(int i=0;i<n;i++){
+                BinaryTreeNode<Integer> p = queue.poll();
+                
+                if(p.data==node){
+                     mynode=p;
+                }
+                
+                if(p.left!=null){
+                    map.put(p.left,p);
+                    queue.add(p.left);
+                }
+                if(p.right!=null){
+                    map.put(p.right,p);
+                    queue.add(p.right);
+                } 
+            }
+        }
+        // for(BinaryTreeNode<Integer> x:map.keySet()){
+        //     System.out.println(x.data+" "+map.get(x).data);
+        // }
+        
+        printnodesAtDistanceK(mynode,map,k); 
+	}
+    
+    public static void printnodesAtDistanceK(BinaryTreeNode<Integer> mynode,HashMap<BinaryTreeNode<Integer>,BinaryTreeNode<Integer>> map,int k){
+        
+        int count=0;
+        HashSet<BinaryTreeNode<Integer>> set=new HashSet<>();
+        set.add(mynode);
+        Queue<BinaryTreeNode<Integer>> queue = new LinkedList<>();
+        queue.add(mynode);
+        while(queue.size()>0){
+            int n=queue.size();
+            for(int i=0;i<n;i++){
+                BinaryTreeNode<Integer> checknode = queue.poll();
+                BinaryTreeNode<Integer> parent= map.get(checknode);
+                if(parent!=null && set.contains(parent)==false){
+                    set.add(parent);
+                    queue.add(parent);
+                }
+                if(checknode.left!=null && (set.contains(checknode.left)==false)){
+                    set.add(checknode.left);
+                    queue.add(checknode.left);
+                }
+                if(checknode.right!=null && (set.contains(checknode.right)==false)){
+                    set.add(checknode.right);
+                    queue.add(checknode.right);
+                } 
+            }
+            count++;
+            if(count==k){
+                 break;
+            }
+        }
+        while(queue.size()>0){
+            BinaryTreeNode<Integer> node=queue.poll();
+            System.out.println(node.data);
+        } 
+            
+    }
+
+}

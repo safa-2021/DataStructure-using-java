@@ -1,0 +1,24 @@
+  
+        static TreeNode<Integer> ans=null;
+        static int ansSum=0;
+    
+    	public static TreeNode<Integer> maxSumNode(TreeNode<Integer> root){
+            
+            helper(root);
+            return ans;
+        }
+            public static void helper(TreeNode<Integer> root){
+                int sum = root.data;
+                for(int i=0;i<root.children.size();i++){
+                    sum+=root.children.get(i).data;
+                }
+                if(ansSum<sum){
+                    ansSum=sum;
+                    ans=root;
+                }
+                for(int i=0;i<root.children.size();i++){
+                    helper(root.children.get(i));
+                }
+                
+            }
+        }

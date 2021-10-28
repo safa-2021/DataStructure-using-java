@@ -1,0 +1,38 @@
+public class Solution {
+	
+    private static BinaryTreeNode<Integer> buildTree(int[] postOrder, int[] inOrder, int postS, int postE, int inS, int inE) {
+        if(inS > inE) {
+            return null;
+        }
+        
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(postOrder[postE]);
+        
+        int rootIndex = -1;
+        for(int i = inS; i <= inE; i++) {
+            if(inOrder[i] == root.data) {
+                rootIndex = i;
+                break;
+            }
+    }
+        
+        int leftInS = inS;
+        int leftInE = rootIndex - 1;
+        int leftPostS = postS;
+        int leftPostE = leftInE - leftInS + leftPostS;
+        int rightPostS = leftPostE + 1;
+        int rightPostE = postE - 1;
+        int rightInS = rootIndex + 1;
+        int rightInE = inE;
+        
+        root.left = buildTree(postOrder, inOrder, leftPostS, leftPostE, leftInS, leftInE);
+        root.right = buildTree(postOrder, inOrder, rightPostS, rightPostE, rightInS, rightInE);
+ 
+return root;
+        
+    }
+    
+	public static BinaryTreeNode<Integer> buildTree(int[] postOrder, int[] inOrder) {
+		return buildTree(postOrder, inOrder, 0, postOrder.length-1, 0, inOrder.length-1);
+	}
+
+}

@@ -1,0 +1,49 @@
+public class Solution {
+
+	/*
+	 * Binary Tree Node class
+	 * 
+	 * class BinaryTreeNode<T> { T data; BinaryTreeNode<T> left; BinaryTreeNode<T>
+	 * right;
+	 * 
+	 * public BinaryTreeNode(T data) { this.data = data; } }
+	 */
+
+	/*
+	 * LinkedList Node Class
+	 *
+	 * 
+	 * class LinkedListNode<T> { T data; LinkedListNode<T> next;
+	 * 
+	 * public LinkedListNode(T data) { this.data = data; } }
+	 */
+    static LinkedListNode<Integer> head;
+    static LinkedListNode<Integer> tail;
+	public static LinkedListNode<Integer> constructLinkedList(BinaryTreeNode<Integer> root) {
+       
+        head=null;
+        tail=null;
+        
+        helper(root);
+        
+        return head;
+    }
+    public static void helper(BinaryTreeNode<Integer> root){
+        if(root==null){
+            return;
+        }
+        helper(root.left);
+        if(head==null){
+            LinkedListNode<Integer> node=new LinkedListNode<>(root.data);
+            head=node;
+            tail=node;
+        }
+        else{
+            LinkedListNode<Integer> node=new LinkedListNode<>(root.data);
+            tail.next=node;
+            tail=tail.next;
+        }
+        helper(root.right);
+        
+    }
+}

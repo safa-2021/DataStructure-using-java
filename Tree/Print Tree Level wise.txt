@@ -1,0 +1,25 @@
+public static void printLevelWise(TreeNode<Integer> root){
+        
+		QueueUsingLL<TreeNode<Integer>> queueNodes = new QueueUsingLL<>();
+        TreeNode<Integer> nullNode = new TreeNode<Integer>(Integer.MIN_VALUE);
+		queueNodes.enqueue(root);
+        queueNodes.enqueue(nullNode);
+		System.out.println(root.data);
+		while(queueNodes.size()!=1) {
+            TreeNode<Integer> temp=null;
+			try {
+                temp = queueNodes.dequeue();
+            }catch(QueueEmptyException e){
+              }
+            if(temp==nullNode){
+                queueNodes.enqueue(nullNode);
+                System.out.println();
+                continue;
+            }
+			for(int i=0;i<temp.children.size();i++) {
+				System.out.print(temp.children.get(i).data+" ");
+				queueNodes.enqueue(temp.children.get(i));
+			}
+		}
+}
+}

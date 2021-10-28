@@ -1,0 +1,32 @@
+import java.util.*;
+public class Solution {
+
+ static int max1 =0,max2=0;
+    public static TreeNode<Integer> findSecondLargest(TreeNode<Integer> root ){
+        
+            helper(root);
+            if(max2!=0){
+                return  new TreeNode<>(max2);
+            }
+            return null;
+        }
+        public static void helper(TreeNode<Integer> root){
+            if(root ==null){
+                return ;
+            }
+            int check=root.data;
+            if(check > max1){
+                max2=max1;
+                max1=check;
+            }
+            if(check>max2 && check<max1){
+                max2=check;
+            }
+            for(int i=0;i<root.children.size();i++){
+                helper(root.children.get(i));
+            }
+            return ;
+            
+            
+        }
+    }

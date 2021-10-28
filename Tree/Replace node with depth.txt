@@ -1,0 +1,30 @@
+public static void replaceWithDepthValue(TreeNode<Integer> root){
+
+		// Write your code here
+        if(root == null){
+return;
+        }
+        QueueUsingLL<TreeNode<Integer>> queueNodes = new QueueUsingLL<>();
+        TreeNode<Integer> nullNode = new TreeNode<Integer>(Integer.MIN_VALUE);
+        queueNodes.enqueue(root);
+          queueNodes.enqueue(nullNode);
+        root.data=0;
+        int count =1;
+        while(queueNodes.size()!=1){
+            TreeNode<Integer> temp = null;
+            try{
+                temp = queueNodes.dequeue();
+            }catch(QueueEmptyException e){
+     }
+            if(temp == nullNode){
+                queueNodes.enqueue(nullNode);
+                count+=1;
+                continue;
+            }
+            for(int i=0;i<temp.children.size();i++){
+                queueNodes.enqueue(temp.children.get(i));
+                temp.children.get(i).data=count;
+            }
+        }
+    }
+}

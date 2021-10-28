@@ -1,0 +1,28 @@
+import java.util.*;
+public class Solution {
+
+ public static int maxFrequencyNumber(int[] arr){
+     HashMap<Integer,Integer> map = new HashMap<>();
+         for(int i=0;i<arr.length;i++){
+             int x = arr[i];
+             if(map.containsKey(x)){
+                 map.put(x,map.get(x)+1);
+             }
+             else{
+                 map.put(x,1);
+             }
+         }
+         int answer=0;
+         int freq=0;
+         for(int i=0;i<arr.length;i++){
+             int x= arr[i];
+             int maxfreq=map.get(x);
+             if(maxfreq>freq){
+                 freq=maxfreq;
+                 answer=x;
+             }
+         }
+         return answer;
+     }
+}
+    

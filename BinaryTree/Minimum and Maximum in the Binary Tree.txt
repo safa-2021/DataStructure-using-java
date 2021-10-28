@@ -1,0 +1,22 @@
+public class Solution {
+
+	public static Pair<Integer, Integer> getMinAndMax(BinaryTreeNode<Integer> root) {
+		//Your code goes here
+        if(root == null){
+        
+     Pair<Integer,Integer> answer= new Pair<>(Integer.MAX_VALUE,Integer.MIN_VALUE);
+            return answer;
+        }
+      
+       Pair<Integer,Integer> leftOne=getMinAndMax(root.left);
+        Pair<Integer,Integer> rightOne=getMinAndMax(root.right);
+        
+        Pair<Integer ,Integer> finalAns=new Pair<>(Integer.MAX_VALUE,Integer.MIN_VALUE);
+        
+        finalAns.minimum=Math.min(root.data,Math.min(leftOne.minimum,rightOne.minimum));
+        finalAns.maximum=Math.max(root.data,Math.max(leftOne.maximum,rightOne.maximum));
+        
+        return finalAns;
+        
+	}
+}

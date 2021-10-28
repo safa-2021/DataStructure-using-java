@@ -1,0 +1,37 @@
+public static boolean Search(BinaryTreeNode<Integer> root,int s){
+        
+        if(root== null){
+            return false;
+        }
+       else if(root.data == s){
+            return true;
+        }
+       else if(root.data>s){
+          return  Search(root.left,s);
+           
+        }
+      else if(root.data<s){
+         return  Search(root.right,s);
+        }
+        return false;
+    }
+    public static void sum(BinaryTreeNode<Integer> root,int s,BinaryTreeNode<Integer> p){
+        if(root==null){
+           return ;
+        }
+        sum(root.left,s,p);
+        sum(root.right,s,p);
+        boolean ans = Search(p,s-root.data);
+        if(ans){
+            if(root.data != s-root.data){
+                System.out.println(Math.min(root.data,s-root.data)+" "+Math.max(root.data,s-root.data));
+                root.data=Integer.MIN_VALUE;
+            }
+        }
+        
+    }
+	public static void printNodesSumToS(BinaryTreeNode<Integer> root, int s) {
+		// Write your code here
+        sum(root,s,root);
+//     public static void printNodesSumToS(BinaryTreeNode<Integer> root, int s) {
+        

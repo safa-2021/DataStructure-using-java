@@ -1,0 +1,20 @@
+public class Solution {
+    
+    public static void newFunction(BinaryTreeNode<Integer> root , int temp){
+       
+        if(root == null){
+            return;
+        }
+        root.data=temp;
+        newFunction(root.left , temp+1);
+        newFunction(root.right , temp+1);
+        
+        
+        
+    }
+	public static void changeToDepthTree(BinaryTreeNode<Integer> root) {
+	    //Your code goes here
+       newFunction(root, 0);
+	}
+
+}
